@@ -1,113 +1,174 @@
-import Image from 'next/image'
+'use client'
 
-export default function Home() {
+import Image from "next/image";
+import { useState } from "react";
+import { dm_serif_display, bebas_neue, dm_serif_text } from "@/utils/fonts";
+
+export default function Page() {
+  const [selectedButton, setSelectedButton] = useState("");
+  const [email, setEmail] = useState("")
+
+  function handleClick(button: string) {
+    setSelectedButton(button);
+  }
+
+  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (selectedButton === "") {
+      alert("Please select either 'Influencer' or 'Brand' before entering your email.");
+    }
+     else {
+      setEmail(e.target.value);
+    }
+  }
+
+  function handleSubmit(e:any) {
+    e.preventDefault()
+    if (email === "") {
+    alert("Please enter your email address.")
+  }
+}
+  
+  console.log(email, selectedButton)
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
+    <div className="bg-betabg sm:h-full md:h-screen">
+      <nav className="bg-white w-full ">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <a href="https://gomonetize.in/" className="flex items-center">
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+              src="/logo.jpg"
+              className="h-8 mr-3"
+              alt="Gomonetize Logo"
+              width={32}
+              height={32}
             />
+            <div className="self-center text-2xl font-semibold whitespace-nowrap text-black">
+              <span className={dm_serif_text.className}>Gomonetize</span>
+            </div>
           </a>
+          <div className="flex md:order-2">
+            <a href="https://gomonetize.in">
+            <button
+              type="button"
+              className="text-white bg-black hover:bg-gray-800  font-medium rounded-[4px] text-[20px] px-[30px] py-[10px] text-center"
+            >
+              <span className={bebas_neue.className}>Home</span>
+            </button>
+            </a>
+            
+            {/* <button
+              data-collapse-toggle="navbar-sticky"
+              type="button"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="navbar-sticky"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button> */}
+          </div>
+          {/* <div
+            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            id="navbar-sticky"
+          >
+            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:border-gray-700">
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                  aria-current="page"
+                >
+                  Home
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Services
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div> */}
+        </div>
+      </nav>
+      <div className="my-[50px] mx-[20px] flex flex-row justify-between items-center flex-wrap md:nowrap">
+        <div className=" grow md:ml-[40px] space-y-[8px] md:flex-1 ">
+          <div className="text-[16px] tracking-wide">
+            <span className={bebas_neue.className}>Sign up for the Beta</span>
+          </div>
+          <div className="text-[56px] leading-[72px] tracking-[3%] text-black">
+            <span className={dm_serif_display.className}>
+              Redefining the way of influencer marketing
+            </span>
+          </div>
+          <div className="space-y-[20px]" >
+            <div className="flex space-x-[15px]">
+              <button
+                type="button"
+                onClick={() => handleClick("influencer")}
+                className={`rounded-[4px] border-black border-2 text-lg py-[12px] text-center w-[135px] tracking-wide ${selectedButton === "influencer" ? "text-white bg-black" : " bg-transparent text-black border-black border-2"}`}
+              >
+                <span className={bebas_neue.className}>Influencer</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => handleClick("brand")}
+                className={`rounded-[4px] border-black border-2 text-lg py-[12px] text-center w-[135px] tracking-wide ${selectedButton === "brand" ? "text-white bg-black" : " bg-transparent text-black border-black border-2"}`}
+              >
+                <span className={bebas_neue.className}>Brand</span>
+              </button>
+            </div>
+            <div>
+            <input type="email" id="email" onChange={handleEmailChange}
+             className="bg-gray-50 border-2 border-solid border-black text-gray-900 text-sm rounded-[1px] focus:ring-0 focus:outline-none focus:ring-black focus:border-black  block w-full p-[10px] placeholder-gray-600 focus:placeholder-gray-500 placeholder:text-center placeholder:text-lg tracking-wide
+            " placeholder="ENTER YOUR EMAIL ADDRESS" required/>
+            </div>
+            <div>
+              <button
+                type="button"
+                onClick={handleSubmit}
+                className="text-white bg-black hover:bg-gray-800 rounded-[4px] font-medium text-lg px-[10px] py-[10px] text-center w-full tracking-wide"
+              >
+                <span className={bebas_neue.className}>Join the waitlist</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="grow md:flex-1 flex justify-center">
+          <Image src="/star.svg" alt="star vector" width={543} height={486} />
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  );
 }
