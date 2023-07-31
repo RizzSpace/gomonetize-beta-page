@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import axios from "axios";
 import { dm_serif_display, bebas_neue, dm_serif_text } from "@/utils/fonts";
 
 export default function Page() {
@@ -21,14 +22,23 @@ export default function Page() {
     }
   }
 
-  function handleSubmit(e:any) {
-    e.preventDefault()
-    if (email === "") {
-    alert("Please enter your email address.")
-  }
-}
-  
-  console.log(email, selectedButton)
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const { data } = await axios.post(
+      "/api/send",
+      {
+        email: email,
+        type: selectedButton,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(data);
+  };
   return (
     <div className="bg-betabg sm:h-full md:h-screen">
       <nav className="bg-white w-full ">
@@ -149,15 +159,16 @@ export default function Page() {
                 <span className={bebas_neue.className}>Brand</span>
               </button>
             </div>
-            <div>
+            <div className="w-auto lg:w-[500px]">
             <input type="email" id="email" onChange={handleEmailChange}
-             className="bg-gray-50 border-2 border-solid border-black text-gray-900 text-sm rounded-[1px] focus:ring-0 focus:outline-none focus:ring-black focus:border-black  block w-full p-[10px] placeholder-gray-600 focus:placeholder-gray-500 placeholder:text-center placeholder:text-lg tracking-wide
+             className="bg-gray-50 border-2 border-solid border-black text-gray-900 text-sm rounded-[4px] focus:ring-0 focus:outline-none focus:ring-black focus:border-black  block w-full p-[10px] placeholder-gray-600 focus:placeholder-gray-500 placeholder:text-center placeholder:text-lg tracking-wide
             " placeholder="ENTER YOUR EMAIL ADDRESS" required/>
+            
             </div>
-            <div>
+            <div className="w-auto lg:w-[500px]">
               <button
                 type="button"
-                onClick={handleSubmit}
+                onClick={(e)=>handleSubmit(e)}
                 className="text-white bg-black hover:bg-gray-800 rounded-[4px] font-medium text-lg px-[10px] py-[10px] text-center w-full tracking-wide"
               >
                 <span className={bebas_neue.className}>Join the waitlist</span>
