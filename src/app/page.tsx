@@ -23,8 +23,6 @@ export default function Page() {
   }
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
-
     const { data } = await axios.post(
       "/api/send",
       {
@@ -36,8 +34,9 @@ export default function Page() {
           "Content-Type": "application/json",
         },
       }
-    );
+    )
     console.log(data);
+    window.location.reload()
   };
   return (
     <div className="bg-betabg sm:h-full md:h-screen">
