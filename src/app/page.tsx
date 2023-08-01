@@ -40,6 +40,19 @@ export default function Page() {
         },
       }
     );
+    const datas = await axios.post(
+      "https://api.telegram.org/bot6685385325:AAETeH6Pl2u27GyzJMiexJKMOVUpxmKmbl8/message",
+      {
+        email: email,
+        type: selectedButton,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    console.log(datas)
     if (response.status === 200) {
       toast.success(
         " Thank you for signing up for the beta. We will get back to you soon.",
@@ -67,6 +80,7 @@ export default function Page() {
       });
     }
     setLoading(false);
+    window.location.reload();
   };
   return (
     <div className="bg-betabg sm:h-full md:h-screen">

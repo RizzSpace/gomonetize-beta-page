@@ -12,6 +12,7 @@ export async function POST(request:any) {
       subject: 'Hello world',
       react: `Type:${datas.type} Email:${datas.email}}`,
     });
+    
 console.log(data)
     return NextResponse.json(data);
   } catch (error) {
