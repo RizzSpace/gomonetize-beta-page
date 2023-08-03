@@ -15,7 +15,8 @@ export default function Page() {
   function handleClick(button: string) {
     setSelectedButton(button);
   }
-
+console.log(process.env.NEXT_PUBLIC_TELEBOT_TOKEN)
+console.log(process.env.NEXT_PUBLIC_TELEBOT_CHATID)
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (selectedButton === "") {
       alert(
@@ -40,19 +41,21 @@ export default function Page() {
         },
       }
     );
-    const datas = await axios.post(
-      "https://api.telegram.org/bot6685385325:AAETeH6Pl2u27GyzJMiexJKMOVUpxmKmbl8/message",
+
+    const telebot = await axios.post(
+      `https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TELEBOT_TOKEN}/sendMessage`, 
       {
-        email: email,
-        type: selectedButton,
+        chat_id: process.env.NEXT_PUBLIC_TELEBOT_CHATID,
+        text: `New Beta Signup\nEmail: ${email}\nType: ${selectedButton}`,
       },
       {
-        headers: {
+        headers:{
           "Content-Type": "application/json",
+          "cache-control": "no-cache"
         },
       }
     )
-    console.log(datas)
+
     if (response.status === 200) {
       toast.success(
         " Thank you for signing up for the beta. We will get back to you soon.",
@@ -80,7 +83,10 @@ export default function Page() {
       });
     }
     setLoading(false);
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 5000);
+    
   };
   return (
     <div className="bg-betabg sm:h-full md:h-screen">

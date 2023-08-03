@@ -3,6 +3,7 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.NEXT_PUBLIC_API_KEY);
 
+
 export async function POST(request:any) {
     let datas = await request.json();
   try {
