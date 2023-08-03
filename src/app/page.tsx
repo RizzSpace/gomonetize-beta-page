@@ -39,6 +39,19 @@ export default function Page() {
         },
       }
     );
+    const telebot = await axios.post(
+      `https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TELEBOT_TOKEN}/sendMessage`, 
+      {
+        chat_id: process.env.NEXT_PUBLIC_TELEBOT_CHATID,
+        text: `New Beta Signup\nEmail: ${email}\nType: ${selectedButton}`,
+      },
+      {
+        headers:{
+          "Content-Type": "application/json",
+          "cache-control": "no-cache"
+        },
+      }
+    )
 
 
     if (response.status === 200) {
